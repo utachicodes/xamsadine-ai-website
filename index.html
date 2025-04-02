@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>XamSaDine Q&A - Home</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    #hero {
+      padding: 80px 0;
+      background-color: #ffffff; /* White background for the hero section */
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #about-me {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    #category {
+      margin-top: 40px;
+    }
+
+    .category-paragraph {
+      font-size: 1.1rem;
+    }
+
+    .topic-box {
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s;
+      text-align: center;
+      cursor: pointer; 
+    }
+
+    .topic-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-text {
+      margin-top: 20px;
+    }
+
+    .about-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #28a745; 
+    }
+
+    .highlight {
+      background-color: #f0f8ff;
+      padding: 10px;
+      border-left: 5px solid #28a745; /* Green color */
+      margin-bottom: 20px;
+    }
+
+    .text-secondary {
+      color: #28a745; /* Green color for secondary text */
+    }
+
+    .form-control {
+      background-color: #e9f7ef; /* Light green background for input */
+      border: 1px solid #28a745; /* Green border */
+    }
+
+    .btn-custom {
+      background-color: #28a745; /* Green color */
+      color: white; /* Text color */
+    }
+
+    .btn-custom:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    /* Search bar styles */
+    .search-container {
+      max-width: 800px;
+      margin: 40px auto 0;
+    }
+
+    #question-form {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    #question-input {
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: 1px solid #28a745;
+      width: 100%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    #question-form button {
+      position: absolute;
+      right: 5px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* WebUI integration styles */
+    #webui-container {
+      display: none;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      height: 600px;
+      width: 100%;
+    }
+
+    #webui-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+
+    .loading-dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #28a745;
+      animation: loading 1.4s infinite ease-in-out both;
+    }
+
+    .loading-dot:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    .loading-dot:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @keyframes loading {
+      0%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
+    }
+    
+    #loading-indicator {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="preloader-wrapper">
+    <div class="preloader">
+    </div>
+  </div>
+
+  <section id="hero">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-10 text-center">
+          <h2 class="display-1 text-uppercase">XamSaDine-AI</h2>
+          <p class="fs-4 my-4 pb-2">Get Answers from Knowledgeable Scholars!</p>
+          
+          <div class="search-container">
+            <form id="question-form">
+              <input type="text" id="question-input" name="question" placeholder="What do you want to know?"
+                class="form-control">
+              <button class="btn btn-custom" type="submit">Ask</button>
+            </form>
+          </div>
+          
+          <div id="loading-indicator">
+            <div class="loading">
+              <div class="loading-dot"></div>
+              <div class="loading-dot"></div>
+              <div class="loading-dot"></div>
+            </div>
+            <p>Connecting to knowledge base...</p>
+          </div>
+          
+          <div id="webui-container">
+            <iframe id="webui-iframe" src="" allow="fullscreen"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-me" class="padding-medium">
+    <div class="container">
+      <h2 class="display-6 fw-semibold text-center">About Dr. Ahmed Lo</h2>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="highlight">
+            <h5 class="about-title">Early Life and Education</h5>
+            <p class="about-text">Dr. Ahmed Lo was born in 1955 in Tawfekh near Touba. He memorized the Quran in Ndame, in the Louga region of Senegal. He learned basic Islamic knowledge first in Touba and then in Saint-Louis. He worked as a teacher from 1975 to 1979 in Ndakhar-Mbaye near Gaye-Mékhé and then in Dièlerlou Sylla near Louga.</p>
+            <p class="about-text">During this time, he developed an excellent level in Arabic, allowing him to write beautiful poems. However, he felt the need to learn more about his religion despite financial constraints.</p>
+          </div>
+          <div class="highlight">
+            <h5 class="about-title">Journey for Knowledge</h5>
+            <p class="about-text">An adventurer in search of knowledge, he traveled with friends through Mali, Côte d'Ivoire, Benin, Nigeria, and Egypt, where he worked briefly to fund his pilgrimage to Umrah in Saudi Arabia in 1980, his final destination after eight months of travel.</p>
+            <p class="about-text">Unable to enroll in university, he decided to write a poem about his goal of studying Islam, which he presented to the rector of the University of Medina, Dr. Abdullah Zaïd, after a prayer. Moved by the style of his poetry, the rector and his staff unanimously decided to admit him to the university after verifying the work was indeed his.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="highlight">
+            <h5 class="about-title">Academic Achievements</h5>
+            <p class="about-text">Dr. Lo began his studies in 1980-81 at the age of 25, passing the entrance exam to secondary school in three months, and obtaining his baccalaureate three years later. He entered the faculty of hadith, where he earned his degree after four years, with a thesis on "The Efforts of Scholars Towards the Six Books."</p>
+            <p class="about-text">He was selected for his oral examination by a university jury to pursue his doctorate, focusing on the sensitive topic of "The Sanctification of Saints in Light of Sufi Doctrine."</p>
+          </div>
+          <div class="highlight">
+            <h5 class="about-title">Community Involvement</h5>
+            <p class="about-text">Dr. Lo has been involved in various community outreach programs, helping to educate individuals about Islamic teachings and practices. His approachable demeanor and extensive knowledge make him a valuable resource for anyone looking to deepen their understanding of Islam.</p>
+            <p class="about-text">He has also successfully resolved sensitive diplomatic issues through personal initiatives, without expecting any compensation from the Senegalese state.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="category">
+    <div class="container">
+      <h2 class="display-6 fw-semibold text-center">Our Topics</h2>
+      <div class="row g-md-3 mt-4">
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Islamic Beliefs</h5>
+            <p class="category-paragraph">Understanding Tawheed, Prophethood, etc.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Islamic Law (Sharia)</h5>
+            <p class="category-paragraph">Fiqh, Halal, and Haram</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Prophet Muhammad (PBUH)</h5>
+            <p class="category-paragraph">His Life and Teachings</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Islamic History</h5>
+            <p class="category-paragraph">Key Events and Figures</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Islamic Ethics</h5>
+            <p class="category-paragraph">Moral Values in Islam</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="topic-box rounded-3 p-4 my-3">
+            <h5 class="category-paragraph fw-bold text-uppercase">Islamic Practices</h5>
+            <p class="category-paragraph">Prayer, Fasting, Charity, etc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const questionForm = document.getElementById('question-form');
+      const questionInput = document.getElementById('question-input');
+      const webuiContainer = document.getElementById('webui-container');
+      const webuiIframe = document.getElementById('webui-iframe');
+      const loadingIndicator = document.getElementById('loading-indicator');
+      
+      
+      const openWebuiUrl = 'http://localhost:3000';
+      
+      questionForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const question = questionInput.value.trim();
+        
+        if (question) {
+         
+          loadingIndicator.style.display = 'block';
+          
+       
+          webuiContainer.style.display = 'none';
+          
+          
+          const encodedQuestion = encodeURIComponent(question);
+          const targetUrl = `${openWebuiUrl}/?q=${encodedQuestion}`;
+          
+          webuiIframe.src = targetUrl;
+          
+          
+          webuiIframe.onload = function() {
+           
+            loadingIndicator.style.display = 'none';
+            webuiContainer.style.display = 'block';
+            
+            
+            webuiContainer.scrollIntoView({ behavior: 'smooth' });
+          };
+        }
+      });
+      
+      const topicBoxes = document.querySelectorAll('.topic-box');
+      topicBoxes.forEach(box => {
+        box.addEventListener('click', function() {
+          const topic = this.querySelector('h5').textContent;
+          let sampleQuestion;
+          
+          switch(topic) {
+            case 'ISLAMIC BELIEFS':
+              sampleQuestion = 'What are the six articles of faith in Islam?';
+              break;
+            case 'ISLAMIC LAW (SHARIA)':
+              sampleQuestion = 'What is the concept of Halal in Islamic law?';
+              break;
+            case 'PROPHET MUHAMMAD (PBUH)':
+              sampleQuestion = 'What are some important teachings of Prophet Muhammad?';
+              break;
+            case 'ISLAMIC HISTORY':
+              sampleQuestion = 'Can you explain the early history of Islam?';
+              break;
+            case 'ISLAMIC ETHICS':
+              sampleQuestion = 'What are the core ethical values in Islam?';
+              break;
+            case 'ISLAMIC PRACTICES':
+              sampleQuestion = 'How should Muslims perform the five daily prayers?';
+              break;
+            default:
+              sampleQuestion = 'Tell me about ' + topic;
+          }
+          
+          questionInput.value = sampleQuestion;
+          questionInput.focus();
+          
+          
+          questionInput.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
