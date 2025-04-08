@@ -52,5 +52,5 @@ This project is licensed under the MIT License.
 ## Contact
 For any inquiries, feel free to reach out:
 - **Email:** abdoullahaljersi@gmail.com
-- **GitHub:** [yourusername](https://github.com/utachicodes)
+- **GitHub:** [utachicodes](https://github.com/utachicodes)
 - **Website:** [Xamsadine AI](https://xamsadine.ai)
